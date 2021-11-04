@@ -17,22 +17,23 @@ static constexpr COLORREF BLACK = 0x000000;
 static constexpr WORD TABLE_EXTERNAL_BORDER_WIDTH = 2;
 static constexpr WORD TABLE_INTERNAL_BORDER_WIDTH = 1;
 
-
 TextTable::TextTable(const LONG padding) :
-    paddingTop(padding), paddingBottom(padding),
-    paddingLeft(padding), paddingRight(padding),
-    rowsAmount(0), columnsAmount(0) {
+    paddingTop(padding),
+    paddingBottom(padding),
+    paddingLeft(padding),
+    paddingRight(padding),
+    rowsAmount(0),
+    columnsAmount(0) {
     LoadTableData();
 }
 
-void TextTable::LoadTableData()
-{
+void TextTable::LoadTableData() {
     if (HRSRC resource = FindResource(NULL, MAKEINTRESOURCE(IDR_TABLE_DATA_1), TABLE_DATA_RESOURCE_TYPE);
         NULL != resource) {
         if (HGLOBAL resourceData = LoadResource(NULL, resource);
             NULL != resourceData) {
             const DWORD dataSize = SizeofResource(NULL, resource);
-            auto *strData = static_cast<wchar_t *>(LockResource(resourceData));
+            auto *strData = static_cast<wchar_t*>(LockResource(resourceData));
             strData += 1; // Skip UTF-16 BOM
             std::wstring str;
             str.assign(strData, dataSize);
@@ -48,8 +49,7 @@ void TextTable::LoadTableData()
     }
 }
 
-std::vector<std::wstring> TextTable::GetData() const
-{
+std::vector<std::wstring> TextTable::GetData() const {
     return _data;
 }
 
@@ -64,9 +64,7 @@ void TextTable::Draw(HWND window, HDC deviceContext) const {
     DrawInternalBorders(deviceContext, top, bottom, left, right);
 }
 
-
-void TextTable::DrawExternalBorders(HDC deviceContext, LONG top, LONG bottom, LONG left, LONG right)
-{
+void TextTable::DrawExternalBorders(HDC deviceContext, LONG top, LONG bottom, LONG left, LONG right) {
     HPEN pen = CreatePen(PS_SOLID, TABLE_EXTERNAL_BORDER_WIDTH, BLACK);
     Rectangle(deviceContext, left, top, right, bottom);
     HGDIOBJ originalPen = SelectObject(deviceContext, pen);
@@ -74,8 +72,7 @@ void TextTable::DrawExternalBorders(HDC deviceContext, LONG top, LONG bottom, LO
     DeleteObject(pen);
 }
 
-void TextTable::DrawInternalBorders(HDC deviceContext, LONG top, LONG bottom, LONG left, LONG right) const
-{
+void TextTable::DrawInternalBorders(HDC deviceContext, LONG top, LONG bottom, LONG left, LONG right) const {
     HPEN pen = CreatePen(PS_SOLID, TABLE_INTERNAL_BORDER_WIDTH, BLACK);
     HGDIOBJ originalPen = SelectObject(deviceContext, pen);
     LONG tableWidth = right - left;

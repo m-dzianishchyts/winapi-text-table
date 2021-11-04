@@ -15,7 +15,7 @@ WinApplication& WinApplication::GetInstance() {
     return winApplication;
 }
 
-WinApplication::WinApplication(TextTable& textTable) :
+WinApplication::WinApplication(TextTable &textTable) :
     instance(NULL),
     _clientAreaWidth(0),
     _clientAreaHeight(0),

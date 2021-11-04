@@ -9,7 +9,7 @@ public:
     HINSTANCE instance;
     LRESULT HandleWinMessage(HWND window, UINT messageType, WPARAM wParam, LPARAM lParam);
     WinApplication(WinApplication &other) = delete;
-    static WinApplication &GetInstance();
+    static WinApplication& GetInstance();
 
 protected:
     explicit WinApplication(TextTable &textTable);
