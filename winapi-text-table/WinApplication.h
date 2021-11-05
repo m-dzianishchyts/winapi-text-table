@@ -19,7 +19,8 @@ private:
     LONG _clientAreaHeight;
 
     TextTable &_textTable;
-    static constexpr LONG TABLE_PADDING = 10;
+    static constexpr LONG TABLE_MARGIN = 10;
+    static constexpr LONG TABLE_CELL_MARGIN = 5;
 
     LRESULT HandleCommand(HWND window, int id, HWND controlWindow, UINT notificationCode) const;
     static void HandleQuit(HWND window);

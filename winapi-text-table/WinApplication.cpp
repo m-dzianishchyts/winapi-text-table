@@ -10,7 +10,7 @@
 INT_PTR CALLBACK About(HWND dialog, UINT message, WPARAM wParam, LPARAM lParam);
 
 WinApplication& WinApplication::GetInstance() {
-    static TextTable textTable(TABLE_PADDING);
+    static TextTable textTable(TABLE_MARGIN, TABLE_CELL_MARGIN);
     static WinApplication winApplication(textTable);
     return winApplication;
 }
