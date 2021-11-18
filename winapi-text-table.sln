@@ -5,9 +5,9 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winapi-text-table", "winapi-text-table\winapi-text-table.vcxproj", "{21EA1135-EEF1-452B-BADE-60255AA8D5EA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6318E040-F862-4210-A764-F7916716F1E5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FAACBD3B-F23F-4155-B608-7FBB4D2674D7}"
 	ProjectSection(SolutionItems) = preProject
-		winapi-text-table\README.md = winapi-text-table\README.md
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
