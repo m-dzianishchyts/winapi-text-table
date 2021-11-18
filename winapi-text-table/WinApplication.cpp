@@ -47,24 +47,21 @@ LRESULT WinApplication::HandleCommand(HWND window, int id, HWND controlWindow, U
 }
 
 void WinApplication::HandleGetMinMaxInfo(HWND window, LPMINMAXINFO minMaxInfo) {
-    minMaxInfo->ptMinTrackSize.x = SM_CXMINTRACK + 250;
-    minMaxInfo->ptMinTrackSize.y = SM_CYMINTRACK + 50;
+    minMaxInfo->ptMinTrackSize.x = SM_CXMINTRACK + MIN_TRACK_WIDTH;
+    minMaxInfo->ptMinTrackSize.y = SM_CYMINTRACK + MIN_TRACK_HEIGHT;
 }
 
 void WinApplication::HandleQuit(HWND window) {
-    Util::Debug(L"QUIT!\n");
     PostQuitMessage(0);
 }
 
 void WinApplication::HandleResize(HWND window, UINT state, LONG width, LONG height) {
-    Util::Debug(L"RESIZE!\n");
     _clientAreaWidth = width;
     _clientAreaHeight = height;
     InvalidateRect(window, NULL, TRUE);
 }
 
 void WinApplication::HandlePaint(HWND window) const {
-    Util::Debug(L"PAINT!\n");
     PAINTSTRUCT ps;
     HDC hdc = BeginPaint(window, &ps);
     HDC bufferDeviceContext = CreateCompatibleDC(hdc);

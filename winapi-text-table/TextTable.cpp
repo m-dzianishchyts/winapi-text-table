@@ -69,7 +69,7 @@ void TextTable::Draw(HWND window, HDC deviceContext) {
     tableArea.right -= tableMarginRight;
     tableArea.bottom -= tableMarginBottom;
 
-    if (AllStringsFitToCells(deviceContext, tableArea)) {
+    if (TextFitsIntoTable(deviceContext, tableArea)) {
         MaximizeFontSize(deviceContext, tableArea);
     } else {
         NormalizeFontSize(deviceContext, tableArea);
@@ -150,7 +150,7 @@ void TextTable::CalculateRowTextHeights(HDC deviceContext, LONG cellContentWidth
     DeleteObject(currentFont);
 }
 
-BOOL TextTable::AllStringsFitToCells(HDC deviceContext, RECT tableArea) {
+BOOL TextTable::TextFitsIntoTable(HDC deviceContext, RECT tableArea) {
     LONG tableWidth = tableArea.right - tableArea.left;
     LONG contentHeight = tableArea.bottom - tableArea.top;
     DOUBLE columnWidth = static_cast<DOUBLE>(tableWidth) / columnsAmount;
@@ -161,21 +161,24 @@ BOOL TextTable::AllStringsFitToCells(HDC deviceContext, RECT tableArea) {
 
     LONG rowsContentTotalHeight = std::accumulate(rowTextHeights.begin(), rowTextHeights.end(), 0);
     LONG rowsTotalHeight = rowsContentTotalHeight + rowsAmount * (cellMarginTop + cellMarginBottom);
-    Util::Debug(L"Fit to height: %d\n", rowsTotalHeight <= contentHeight);
     return rowsTotalHeight <= contentHeight;
 }
 
 void TextTable::MaximizeFontSize(HDC deviceContext, RECT tableArea) {
     do {
         _font.lfHeight++;
-    } while (AllStringsFitToCells(deviceContext, tableArea));
+    } while (TextFitsIntoTable(deviceContext, tableArea));
     _font.lfHeight--;
 }
 
 void TextTable::NormalizeFontSize(HDC deviceContext, RECT tableArea) {
-    do {
+    while (!TextFitsIntoTable(deviceContext, tableArea)) {
+        if (_font.lfHeight == 0) {
+            _font.lfHeight++;
+            break;
+        }
         _font.lfHeight--;
-    } while (_font.lfHeight > 0 && !AllStringsFitToCells(deviceContext, tableArea));
+    }
 }
 
 void TextTable::DrawData(HDC deviceContext, const RECT tableArea) {

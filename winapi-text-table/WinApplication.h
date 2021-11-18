@@ -22,6 +22,9 @@ private:
     static constexpr LONG TABLE_MARGIN = 10;
     static constexpr LONG TABLE_CELL_MARGIN = 5;
 
+    static constexpr LONG MIN_TRACK_WIDTH = 250;
+    static constexpr LONG MIN_TRACK_HEIGHT = 50;
+
     LRESULT HandleCommand(HWND window, int id, HWND controlWindow, UINT notificationCode) const;
     static void HandleQuit(HWND window);
     void HandleResize(HWND window, UINT state, LONG width, LONG height);

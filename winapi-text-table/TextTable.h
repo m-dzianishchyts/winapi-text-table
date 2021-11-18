@@ -31,7 +31,7 @@ private:
     void DrawInternalHorizontalBorders(HDC deviceContext, RECT tableArea);
     void DrawData(HDC deviceContext, RECT tableArea);
 
-    BOOL AllStringsFitToCells(HDC deviceContext, RECT tableArea);
+    BOOL TextFitsIntoTable(HDC deviceContext, RECT tableArea);
     void CalculateRowTextHeights(HDC deviceContext, LONG cellContentWidth, std::vector<LONG> &rowTextHeights);
     void MaximizeFontSize(HDC deviceContext, RECT tableArea);
     void NormalizeFontSize(HDC deviceContext, RECT tableArea);
