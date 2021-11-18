@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "winapi-text-table.h"
+#include "WinAPI.TextTable.h"
 #include "WinApplication.h"
 
 constexpr auto MAX_LOAD_STRING = 100;
